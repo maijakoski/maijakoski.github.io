@@ -3,16 +3,340 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Maija Kosken varhaisnuorten kirjat: mysteerejä, salakoodeja, teknologiaa ja pieleen meneviä piloja.">
   <title>Maija Koski – kirjailija</title>
+
+  <style>
+    :root {
+      --tausta: #050b14;
+      --kortti: #0b1726;
+      --teksti: #f5f7fa;
+      --vaalea: #b7c7d9;
+      --sininen: #20bfff;
+      --violetti: #8b6cff;
+      --kulta: #e8b85c;
+      --oranssi: #ff9f43;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--tausta);
+      color: var(--teksti);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 1rem 6%;
+      background: rgba(5, 11, 20, 0.96);
+      border-bottom: 1px solid #17334f;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav {
+      max-width: 1180px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .nimi {
+      color: var(--teksti);
+      font-size: 1.2rem;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+    }
+
+    nav div {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+
+    nav div a {
+      color: var(--vaalea);
+      text-decoration: none;
+    }
+
+    nav div a:hover {
+      color: var(--sininen);
+    }
+
+    main {
+      max-width: 1180px;
+      margin: auto;
+      padding: 0 6% 5rem;
+    }
+
+    .alku {
+      min-height: 52vh;
+      display: grid;
+      align-content: center;
+      padding: 5rem 0 4rem;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(32, 191, 255, 0.15), transparent 40%),
+        radial-gradient(circle at 80% 50%, rgba(139, 108, 255, 0.12), transparent 35%);
+    }
+
+    .alku h1 {
+      margin: 0;
+      max-width: 850px;
+      font-size: clamp(2.8rem, 8vw, 6.5rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+    }
+
+    .alku p {
+      max-width: 760px;
+      margin: 1.5rem 0 0;
+      color: var(--vaalea);
+      font-size: clamp(1.1rem, 2.5vw, 1.55rem);
+    }
+
+    .sarja {
+      margin: 2rem 0 5rem;
+      padding: clamp(1.4rem, 4vw, 3rem);
+      border-radius: 24px;
+      background: var(--kortti);
+      border: 1px solid #17334f;
+    }
+
+    .sarja h2 {
+      margin-top: 0;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      line-height: 1.1;
+    }
+
+    .harhajalki h2 {
+      color: var(--sininen);
+    }
+
+    .prankkarit h2 {
+      color: var(--oranssi);
+    }
+
+    .kirja {
+      display: grid;
+      grid-template-columns: minmax(220px, 340px) 1fr;
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: center;
+    }
+
+    .kansi {
+      display: block;
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 174, 255, 0.22);
+    }
+
+    .sarjatunnus {
+      margin: 0 0 0.4rem;
+      color: var(--kulta);
+      font-size: 0.9rem;
+      font-weight: bold;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .kirja h3 {
+      margin: 0 0 1rem;
+      font-size: clamp(1.7rem, 4vw, 2.8rem);
+      line-height: 1.15;
+    }
+
+    .kirja p {
+      color: var(--vaalea);
+      font-size: 1.08rem;
+    }
+
+    .prankki-paikka {
+      min-height: 440px;
+      display: grid;
+      place-content: center;
+      padding: 2rem;
+      border: 2px dashed rgba(255, 159, 67, 0.55);
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 25% 30%, rgba(255, 159, 67, 0.18), transparent 30%),
+        radial-gradient(circle at 75% 70%, rgba(139, 108, 255, 0.22), transparent 35%),
+        #111321;
+      text-align: center;
+    }
+
+    .prankki-paikka strong {
+      display: block;
+      color: var(--oranssi);
+      font-size: 2rem;
+      line-height: 1.1;
+    }
+
+    .prankki-paikka span {
+      margin-top: 1rem;
+      color: var(--vaalea);
+    }
+
+    .tietoa {
+      max-width: 760px;
+      margin: 7rem auto 2rem;
+      text-align: center;
+    }
+
+    .tietoa h2 {
+      font-size: 2.5rem;
+    }
+
+    .tietoa p {
+      color: var(--vaalea);
+      font-size: 1.1rem;
+    }
+
+    footer {
+      padding: 2.5rem 6%;
+      border-top: 1px solid #17334f;
+      color: var(--vaalea);
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      header {
+        position: static;
+      }
+
+      nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .kirja {
+        grid-template-columns: 1fr;
+      }
+
+      .kansi {
+        max-width: 340px;
+        margin: auto;
+      }
+
+      .prankki-paikka {
+        min-height: 300px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Maija Koski</h1>
-  <p>Mysteerejä, salakoodeja ja hallitsemattomia keksintöjä.</p>
+  <header>
+    <nav>
+      <a class="nimi" href="#">MAIJA KOSKI</a>
+      <div>
+        <a href="#harhajalki">Harhajälki</a>
+        <a href="#prankkarit">Pränkkärit</a>
+        <a href="#kirjailija">Kirjailija</a>
+      </div>
+    </nav>
+  </header>
 
-  <h2>Harhajälki-sarja</h2>
-  <p>Sarjan ensimmäinen osa: <em>Harhajälki</em></p>
+  <main>
+    <section class="alku">
+      <h1>Seikkailu alkaa vihjeestä.</h1>
+      <p>
+        Mysteerejä, salakoodeja, teknologiaa ja hallitsemattomia
+        keksintöjä varhaisnuorille – ja kaikille, jotka kaipaavat
+        pientä seikkailua päiväänsä.
+      </p>
+    </section>
 
-  <h2>Pränkkärit-sarja</h2>
-  <p>Sarjan ensimmäinen osa: <em>Pränkkärit ja kuninkaalliset konvehdit</em></p>
+    <section class="sarja harhajalki" id="harhajalki">
+      <h2>Harhajälki-sarja</h2>
+
+      <div class="kirja">
+        <img
+          class="kansi"
+          src="harhajalki-kansi.png"
+          alt="Harhajälki-kirjan kansi"
+        >
+
+        <div>
+          <p class="sarjatunnus">Sarjan ensimmäinen osa</p>
+          <h3>Harhajälki</h3>
+
+          <p>
+            Ami on juuri muuttanut Naantaliin ja aloittanut uudessa koulussa.
+            Ongelmanratkaisun kurssilla hän päätyy samaan ryhmään
+            Lottanooran, Oskarin ja Eelin kanssa.
+          </p>
+
+          <p>
+            Sokkeloiden, salakirjoitusten ja eri puolille kaupunkia
+            kätkettyjen vihjeiden seuraaminen alkaa pian muistuttaa
+            oikeaa mysteeriä. Johtavatko vihjeet samaan paikkaan,
+            vai seuraavatko nuoret harhajälkeä?
+          </p>
+
+          <p>
+            Lähitulevaisuuden Naantaliin sijoittuva vauhdikas
+            mysteeriseikkailu.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sarja prankkarit" id="prankkarit">
+      <h2>Pränkkärit-sarja</h2>
+
+      <div class="kirja">
+        <div class="prankki-paikka">
+          <strong>PRÄNKKÄRIT</strong>
+          <span>Kansikuva valmistuu myöhemmin</span>
+        </div>
+
+        <div>
+          <p class="sarjatunnus">Sarjan ensimmäinen osa</p>
+          <h3>Pränkkärit ja kuninkaalliset konvehdit</h3>
+
+          <p>
+            Isla, Alina, Make ja Leevi osaavat rakentaa vaikuttavia
+            piloja. Se ei tarkoita, että pilat toimisivat suunnitellusti.
+          </p>
+
+          <p>
+            Kun kuvioihin sekaantuvat hohtavat luksuskonvehdit,
+            epäilyttävä vartija ja omapäinen robottinäätä,
+            pieleen mennyt pila muuttuu rikosmysteeriksi.
+          </p>
+
+          <p>
+            Humoristinen seikkailu täynnä vempaimia, hankalia tilanteita
+            ja neljä täysin viatonta lasta.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tietoa" id="kirjailija">
+      <h2>Maija Koski</h2>
+      <p>
+        IT-nörtti jo ajalta ennen internetiä, tekoälystä innostunut
+        mysteerien, salakirjoitusten, piilotettujen viestien ja
+        robottien ystävä.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    © Maija Koski
+  </footer>
 </body>
 </html>
